@@ -9,14 +9,16 @@ config.colors = {
   background = '#000000',
 }
 
--- Transparency (default)
+-- Transparency (default: opaque)
 config.window_background_opacity = 1.0
 
 -- Opacity control functions
+local DEFAULT_OPACITY = 0.8
+
 wezterm.on('toggle-opacity', function(window, pane)
   local overrides = window:get_config_overrides() or {}
-  if overrides.window_background_opacity == 1.0 then
-    overrides.window_background_opacity = 0.8
+  if overrides.window_background_opacity == nil or overrides.window_background_opacity == 1.0 then
+    overrides.window_background_opacity = DEFAULT_OPACITY
   else
     overrides.window_background_opacity = 1.0
   end
@@ -81,7 +83,7 @@ config.keys = {
   { key = '_', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
 
   -- 透過操作
-  { key = 'u', mods = 'CTRL|SHIFT', action = act.EmitEvent 'toggle-opacity' },
+  { key = 'B', mods = 'CTRL|SHIFT', action = wezterm.action.EmitEvent 'toggle-opacity' },
   { key = 'UpArrow', mods = 'CTRL|SHIFT', action = act.EmitEvent 'increase-opacity' },
   { key = 'DownArrow', mods = 'CTRL|SHIFT', action = act.EmitEvent 'decrease-opacity' },
 }
