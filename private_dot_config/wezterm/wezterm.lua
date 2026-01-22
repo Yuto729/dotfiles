@@ -11,9 +11,9 @@ config.colors = {
 -- Transparency
 config.window_background_opacity = 1.0
 
--- Font
-config.font = wezterm.font('DejaVu Sans Mono', { weight = 'Bold' })
-config.font_size = 12.0
+-- Font (HackGen - Japanese optimized)
+config.font = wezterm.font('HackGen Console NF')
+config.font_size = 14.0
 
 -- Cursor
 config.default_cursor_style = 'BlinkingBlock'
