@@ -76,6 +76,35 @@ https://github.com/dariogriffo/ghostty-debian
 └── README.md
 ```
 
+## 設定を変更する場合
+
+chezmoiはシンボリックリンクではなくコピーで動作するため、以下の手順で変更を行う。
+
+### 方法1: chezmoi edit を使う（推奨）
+
+```bash
+# 設定ファイルを編集
+chezmoi edit ~/.config/wezterm/wezterm.lua
+
+# 変更を適用
+chezmoi apply
+
+# GitHubにプッシュ
+chezmoi cd
+git add -A && git commit -m "Update wezterm config" && git push
+```
+
+### 方法2: 直接編集した場合
+
+```bash
+# ~/.config/xxx を直接編集した後、chezmoiに取り込む
+chezmoi add ~/.config/wezterm/wezterm.lua
+
+# GitHubにプッシュ
+chezmoi cd
+git add -A && git commit -m "Update wezterm config" && git push
+```
+
 ## 便利なコマンド
 
 ```bash
