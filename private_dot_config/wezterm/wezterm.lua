@@ -1,0 +1,58 @@
+-- WezTerm Configuration (Ghostty-like)
+local wezterm = require 'wezterm'
+local config = wezterm.config_builder()
+
+-- Theme and colors
+config.color_scheme = 'Dracula'
+config.colors = {
+  background = '#000000',
+}
+
+-- Transparency
+config.window_background_opacity = 1.0
+
+-- Font
+config.font = wezterm.font('DejaVu Sans Mono', { weight = 'Bold' })
+config.font_size = 12.0
+
+-- Cursor
+config.default_cursor_style = 'BlinkingBlock'
+
+-- Window
+config.window_decorations = 'RESIZE'
+config.window_padding = {
+  left = 5,
+  right = 5,
+  top = 5,
+  bottom = 5,
+}
+
+-- Tab bar
+config.enable_tab_bar = true
+config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = false
+
+-- Keybindings
+config.keys = {
+  -- Alt+left/right を無効化
+  { key = 'LeftArrow', mods = 'ALT', action = wezterm.action.DisableDefaultAssignment },
+  { key = 'RightArrow', mods = 'ALT', action = wezterm.action.DisableDefaultAssignment },
+
+  -- 分割操作
+  { key = 'q', mods = 'CTRL|SHIFT', action = wezterm.action.CloseCurrentPane { confirm = true } },
+  { key = 'h', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'j', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'k', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'l', mods = 'CTRL', action = wezterm.action.ActivatePaneDirection 'Right' },
+  { key = 'z', mods = 'CTRL', action = wezterm.action.TogglePaneZoomState },
+
+  -- タブ操作
+  { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivateTabRelative(-1) },
+  { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivateTabRelative(1) },
+
+  -- 分割作成（追加）
+  { key = '|', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  { key = '_', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
+}
+
+return config
