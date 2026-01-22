@@ -86,6 +86,12 @@ config.keys = {
   { key = 'B', mods = 'CTRL|SHIFT', action = wezterm.action.EmitEvent 'toggle-opacity' },
   { key = 'UpArrow', mods = 'CTRL|SHIFT', action = act.EmitEvent 'increase-opacity' },
   { key = 'DownArrow', mods = 'CTRL|SHIFT', action = act.EmitEvent 'decrease-opacity' },
+
+  -- ペインリサイズ
+  { key = 'H', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Left', 5 } },
+  { key = 'J', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Down', 5 } },
+  { key = 'K', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Up', 5 } },
+  { key = 'L', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Right', 5 } },
 }
 
 return config
