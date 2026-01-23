@@ -92,6 +92,10 @@ config.keys = {
   { key = 'J', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Down', 5 } },
   { key = 'K', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Up', 5 } },
   { key = 'L', mods = 'CTRL|ALT', action = act.AdjustPaneSize { 'Right', 5 } },
+
+  -- コピー/ペースト
+  { key = 'C', mods = 'CTRL|SHIFT', action = act.CopyTo 'Clipboard' },
+  { key = 'V', mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
 }
 
 return config
