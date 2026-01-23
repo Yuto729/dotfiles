@@ -10,12 +10,11 @@ return {
       "javascript",
       "json",
       "yaml",
-      -- "markdown", -- Markdownのパーサーを無効化
-      -- "markdown_inline",
+      "markdown",
+      "markdown_inline",
     },
     highlight = {
       enable = true,
-      disable = { "markdown" }, -- Markdownのハイライトを無効化
     },
   },
 }
