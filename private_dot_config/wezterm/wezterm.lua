@@ -41,18 +41,19 @@ end
 
 -- タイトルをキャッシュ（外部ツールが設定したタイトルは優先）
 wezterm.on("update-status", function(window, pane)
+  local pane_id = pane:pane_id()
   local pane_title = pane:get_title()
   -- デフォルトのタイトルパターン: "user@host: path" 形式
   local is_default = pane_title:match("^%w+@%w+:") ~= nil
 
   if not is_default and pane_title ~= "" then
     -- 外部ツールが設定したタイトルを使用
-    title_cache[pane:pane_id()] = pane_title
+    title_cache[pane_id] = pane_title
   else
     -- デフォルトの場合は branch:directory 形式
     local title = get_tab_title(pane)
     if title then
-      title_cache[pane:pane_id()] = title
+      title_cache[pane_id] = title
     end
   end
 end)
