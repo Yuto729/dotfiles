@@ -77,8 +77,8 @@ config.keys = {
   -- タブ操作
   { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivateTabRelative(-1) },
   { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivateTabRelative(1) },
-  { key = 'h', mods = 'CTRL|SHIFT|ALT', action = act.MoveTabRelative(-1) },
-  { key = 'l', mods = 'CTRL|SHIFT|ALT', action = act.MoveTabRelative(1) },
+  { key = '1', mods = 'CTRL', action = act.MoveTabRelative(-1) },
+  { key = '2', mods = 'CTRL', action = act.MoveTabRelative(1) },
 
   -- 分割作成（追加）
   { key = '|', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },

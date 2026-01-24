@@ -25,8 +25,8 @@
 |------|------|
 | `Ctrl+Shift+H` | 前のタブ |
 | `Ctrl+Shift+L` | 次のタブ |
-| `Ctrl+Shift+Alt+H` | タブを左へ移動 |
-| `Ctrl+Shift+Alt+L` | タブを右へ移動 |
+| `Ctrl+1` | タブを左へ移動 |
+| `Ctrl+2` | タブを右へ移動 |
 
 ### 透過操作
 
