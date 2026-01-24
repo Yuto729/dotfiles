@@ -6,6 +6,71 @@ local config = wezterm.config_builder()
 -- Leader key
 config.leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 }
 
+-- タブタイトル用キャッシュ
+local title_cache = {}
+
+-- 現ディレクトリとgitブランチ名を取得
+local function get_tab_title(pane)
+  local cwd_uri = pane:get_current_working_dir()
+  if not cwd_uri then
+    return nil
+  end
+
+  local cwd = tostring(cwd_uri):gsub("^file://[^/]*", "")
+
+  if not cwd or cwd == "" then
+    return nil
+  end
+
+  local current_dir = cwd:match("([^/]+)/?$") or cwd
+
+  -- Gitのブランチ名を取得
+  local success, stdout, stderr = wezterm.run_child_process({
+    "git", "-C", cwd, "branch", "--show-current"
+  })
+
+  if success and stdout then
+    local branch = stdout:gsub("%s+", "")
+    if branch ~= "" then
+      return branch .. ':' .. current_dir
+    end
+  end
+
+  return current_dir
+end
+
+-- タイトルをキャッシュ（外部ツールが設定したタイトルは優先）
+wezterm.on("update-status", function(window, pane)
+  local pane_title = pane:get_title()
+  -- デフォルトのタイトルパターン: "user@host: path" 形式
+  local is_default = pane_title:match("^%w+@%w+:") ~= nil
+
+  if not is_default and pane_title ~= "" then
+    -- 外部ツールが設定したタイトルを使用
+    title_cache[pane:pane_id()] = pane_title
+  else
+    -- デフォルトの場合は branch:directory 形式
+    local title = get_tab_title(pane)
+    if title then
+      title_cache[pane:pane_id()] = title
+    end
+  end
+end)
+
+-- タブのタイトルを変更
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  local pane_id = tab.active_pane.pane_id
+  return title_cache[pane_id] or tab.active_pane.title
+end)
+
+-- ウィンドウタイトルを変更
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, config)
+  local zoomed = tab.active_pane.is_zoomed and '[Z] ' or ''
+  local index = #tabs > 1 and string.format('[%d/%d] ', tab.tab_index + 1, #tabs) or ''
+  local title = title_cache[pane.pane_id] or tab.active_pane.title
+  return zoomed .. index .. title
+end)
+
 -- Theme and colors
 config.color_scheme = 'Dracula'
 config.colors = {
