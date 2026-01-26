@@ -103,6 +103,17 @@ config.font_size = 14.0
 -- Cursor
 config.default_cursor_style = 'BlinkingBlock'
 
+-- IME (ibus)
+-- ランチャーから起動時に環境変数が渡されない場合があるため明示的に設定
+config.use_ime = true
+config.xim_im_name = 'ibus'
+config.enable_wayland = false
+config.set_environment_variables = {
+  XMODIFIERS = '@im=ibus',
+  GTK_IM_MODULE = 'ibus',
+  QT_IM_MODULE = 'ibus',
+}
+
 -- Window
 config.window_decorations = 'RESIZE'
 config.window_padding = {
@@ -162,7 +173,7 @@ config.keys = {
 
   -- Workspace
   { key = 'w', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'WORKSPACES', title = 'Select workspace' } },
-  { key = '$', mods = 'LEADER', action = act.PromptInputLine {
+  { key = '$', mods = 'LEADER|SHIFT', action = act.PromptInputLine {
       description = 'Set workspace title:',
       action = wezterm.action_callback(function(win, pane, line)
         if line then
