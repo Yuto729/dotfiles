@@ -4,3 +4,12 @@
 
 -- jj to escape insert mode
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Escape insert mode" })
+
+-- Copy diagnostic message to clipboard
+vim.keymap.set("n", "<leader>yc", function()
+  local diag = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+  if #diag > 0 then
+    vim.fn.setreg("+", diag[1].message)
+    vim.notify("Copied: " .. diag[1].message, vim.log.levels.INFO)
+  end
+end, { desc = "Copy diagnostic message" })
