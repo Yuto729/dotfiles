@@ -6,6 +6,9 @@ return {
     view_options = {
       show_hidden = true,
     },
+    keymaps = {
+      ["q"] = "actions.close",
+    },
   },
   dependencies = { { "nvim-mini/mini.icons", opts = {} } },
   lazy = false,
