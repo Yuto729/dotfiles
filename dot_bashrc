@@ -188,6 +188,6 @@ alias hhkb='setxkbmap -layout us -option ctrl:nocaps'
 alias laptop='setxkbmap -layout jp -option ctrl:nocaps'
 
 # tmux自動起動
-if [[ -z "$TMUX" && -z "$VIM" && "$TERM_PROGRAM" != "vscode" ]]; then
+if [[ -z "$TMUX" && -z "$VIM" && -z "$NVIM" && "$TERM_PROGRAM" != "vscode" ]]; then
   tmux attach-session -t default || tmux new-session -s default
 fi
