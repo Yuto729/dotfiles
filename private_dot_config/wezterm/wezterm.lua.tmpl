@@ -103,9 +103,10 @@ config.font_size = 14.0
 -- Cursor
 config.default_cursor_style = 'BlinkingBlock'
 
--- IME (ibus)
--- ランチャーから起動時に環境変数が渡されない場合があるため明示的に設定
+-- IME
 config.use_ime = true
+{{- if eq .chezmoi.os "linux" }}
+-- ランチャーから起動時に環境変数が渡されない場合があるため明示的に設定
 config.xim_im_name = 'ibus'
 config.enable_wayland = false
 config.set_environment_variables = {
@@ -113,6 +114,7 @@ config.set_environment_variables = {
   GTK_IM_MODULE = 'ibus',
   QT_IM_MODULE = 'ibus',
 }
+{{- end }}
 
 -- Window
 config.window_decorations = 'RESIZE'
