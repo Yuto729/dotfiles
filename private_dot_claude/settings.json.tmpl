@@ -1,0 +1,35 @@
+{
+  "autoUpdatesChannel": "stable",
+  "permissions": {
+    "allow": [
+{{- if eq .chezmoi.os "linux" }}
+      "Bash(paplay:*)",
+      "Bash(notify-send:*)",
+{{- end }}
+      "Read(~/.bashrc)",
+      "Bash(git diff:*)",
+      "Bash(git fetch:*)",
+      "Bash(git merge origin/:*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+{{- if eq .chezmoi.os "linux" }}
+            "command": "(paplay {{ .chezmoi.homeDir }}/.claude/sounds/maltese_dog1.oga &) && notify-send -u normal -i dialog-information \"🐶 確認\" \"Claudeが確認を要求しています.\""
+{{- else if eq .chezmoi.os "darwin" }}
+            "command": "(afplay {{ .chezmoi.homeDir }}/.claude/sounds/maltese_dog1.oga &) && osascript -e 'display notification \"Claudeが確認を要求しています.\" with title \"🐶 確認\"'"
+{{- end }}
+          }
+        ]
+      }
+    ]
+  }
+}

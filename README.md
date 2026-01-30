@@ -96,12 +96,38 @@ tmux
 | `prefix + Ctrl+s` | セッション手動保存 |
 | `prefix + Ctrl+r` | セッション手動復元 |
 
+### Claude Code
+
+chezmoiテンプレートでOS別に設定を分岐している（`settings.json.tmpl`）。
+
+- Linux: `paplay` + `notify-send` で通知
+- macOS: `afplay` + `osascript` で通知
+
+カスタムコマンド（`commands/`）はOS共通。
+
+#### 管理対象
+
+| ファイル | 説明 |
+|---------|------|
+| `settings.json` | グローバル設定（permissions, hooks）※テンプレートでOS分岐 |
+| `commands/analyze-diff.md` | `/analyze-diff` カスタムコマンド |
+
+#### 注意
+
+- `settings.local.json` はマシン固有のためchezmoi管理対象外
+- `.credentials.json` は秘密情報のため管理対象外
+- 通知用サウンドファイル（`sounds/`）は別途配置が必要
+
 ## ファイル構成
 
 ```
 ~/.local/share/chezmoi/
 ├── dot_bashrc                 # Bash設定
 ├── dot_tmux.conf              # tmux設定
+├── private_dot_claude/
+│   ├── settings.json.tmpl     # Claude Code設定（OS分岐テンプレート）
+│   └── commands/
+│       └── analyze-diff.md    # カスタムコマンド
 ├── private_dot_config/
 │   ├── ghostty/               # Ghostty設定
 │   ├── nvim/                  # Neovim設定 (LazyVim)
