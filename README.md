@@ -64,11 +64,44 @@ https://wezterm.org/install/linux.html#__tabbed_1_3
 linux版は以下を参照
 https://github.com/dariogriffo/ghostty-debian
 
+### tmux
+
+```bash
+# tmuxのインストール
+sudo apt install tmux
+
+# TPM（プラグインマネージャー）のインストール
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# tmux起動後、prefix + I でプラグインをインストール
+tmux
+# Ctrl+a → Shift+i
+```
+
+#### プラグイン
+
+| プラグイン | 役割 |
+|-----------|------|
+| tmux-resurrect | セッションの手動保存・復元 |
+| tmux-continuum | resurrectの自動実行（15分間隔で保存、起動時に自動復元） |
+
+#### キーバインド
+
+| キー | 動作 |
+|------|------|
+| `Ctrl+a` | prefix（デフォルトの`Ctrl+b`から変更） |
+| `prefix + \|` | 縦分割 |
+| `prefix + -` | 横分割 |
+| `Alt+矢印キー` | ペイン移動 |
+| `prefix + Ctrl+s` | セッション手動保存 |
+| `prefix + Ctrl+r` | セッション手動復元 |
+
 ## ファイル構成
 
 ```
 ~/.local/share/chezmoi/
 ├── dot_bashrc                 # Bash設定
+├── dot_tmux.conf              # tmux設定
 ├── private_dot_config/
 │   ├── ghostty/               # Ghostty設定
 │   ├── nvim/                  # Neovim設定 (LazyVim)
