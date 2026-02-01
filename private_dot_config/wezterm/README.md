@@ -104,6 +104,24 @@
 | `Ctrl+Shift+P` | コマンドパレット |
 | `Shift+PageUp/Down` | スクロール |
 
+## トラブルシューティング
+
+### 日本語変換ができない（ibus + mozc）
+
+WezTerm は GTK/Qt ツールキットを使用していないため、ibus との連携が不安定になることがある。
+日本語入力で変換（スペースキー）が効かなくなった場合、ibus デーモンの再起動で復旧する。
+
+```bash
+ibus restart
+```
+
+その後 WezTerm を再起動する。
+
+改善しない場合は以下も検討:
+
+- **fcitx5 への切り替え**: ibus より WezTerm との相性が良いと多数報告されている
+- **nightly ビルドの導入**: `sudo apt install wezterm-nightly` で IME 関連の修正が含まれる場合がある
+
 ## 注意事項
 
 - `Ctrl+H` はシェルのバックスペースと競合する可能性あり
