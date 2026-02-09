@@ -6,6 +6,7 @@ return {
         "basedpyright",
         "ruff",
         "debugpy",
+        "mypy",
       },
     },
   },
