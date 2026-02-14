@@ -47,6 +47,6 @@ gog calendar events --max=30 --account=<ACCOUNT>
 
 ## 注意
 
-- `source ~/.profile` が必要な場合がある（brewパス未読み込み時）
+- `source ~/.profile` は使用禁止（不要）
 - `--today`, `--tomorrow`, `--week` はタイムゾーン対応
 - 結果は時系列で整理し、日付・時間・タイトルをテーブル形式で表示する

@@ -55,6 +55,6 @@ gog tasks list <tasklistId> --json --account=<ACCOUNT>
 
 ## 注意
 
-- `source ~/.profile` が必要な場合がある（brewパス未読み込み時）
+- `source ~/.profile` は使用禁止（不要）
 - タスクリストIDはBase64エンコードされた文字列。シェルでクォートする
 - 結果は期限順に整理し、期限超過のタスクを強調して表示する

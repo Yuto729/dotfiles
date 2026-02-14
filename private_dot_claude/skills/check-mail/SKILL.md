@@ -44,7 +44,7 @@ gog gmail get <messageId> --account=<ACCOUNT>
 
 ## 注意
 
-- `source ~/.profile` が必要な場合がある（brewパス未読み込み時）
+- `source ~/.profile` は使用禁止（不要）
 - **特に指定がない場合は `"in:anywhere"` で全メールを検索する**（未読のみ等の絞り込みはユーザーの指示があるときだけ）
 - 検索クエリはGmail検索構文に準拠（`from:`, `to:`, `subject:`, `is:unread`, `has:attachment`, `after:`, `before:` 等）
 - 結果はテーブル形式で整理して表示する
