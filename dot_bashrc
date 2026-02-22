@@ -186,3 +186,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # キーボードレイアウト切り替え
 alias hhkb='setxkbmap -layout us -option ctrl:nocaps'
 alias laptop='setxkbmap -layout jp -option ctrl:nocaps'
+export PATH="$HOME/go/bin:$PATH"
+
+# ghq + fzf でリポジトリに移動
+g() {
+  local repo=$(ghq list -p | fzf --preview 'ls -la {}' --preview-window=right:50%:wrap)
+  if [ -n "$repo" ]; then
+    cd "$repo"
+  fi
+}
+. "$HOME/.cargo/env"
+export PATH="$HOME/.local/bin:$PATH"

@@ -1,5 +1,4 @@
 {
-  "autoUpdatesChannel": "stable",
   "permissions": {
     "allow": [
 {{- if eq .chezmoi.os "linux" }}
@@ -26,6 +25,7 @@
       "Bash(sudo:*)"
     ]
   },
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -42,5 +42,6 @@
         ]
       }
     ]
-  }
+  },
+  "autoUpdatesChannel": "stable"
 }
