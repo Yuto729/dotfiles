@@ -197,3 +197,5 @@ g() {
 }
 . "$HOME/.cargo/env"
 export PATH="$HOME/.local/bin:$PATH"
+
+alias claude-mem='bun "/home/mitomi/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
