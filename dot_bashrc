@@ -116,9 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+# Volta (disabled)
+# export VOLTA_HOME="$HOME/.volta"
+# export PATH="$VOLTA_HOME/bin:$PATH"
 
 
 # open obsidian from bash
@@ -166,8 +166,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-export PATH="$HOME/.volta/bin:$PATH"
-
 # 英和, 和英辞典用のヘルパー関数.
 # 辞書を引く(英和)
 function ejdict() {
@@ -195,7 +193,24 @@ g() {
     cd "$repo"
   fi
 }
+
+# git wt + fzf で worktree に移動
+gw() {
+  local line dir
+  line="$(
+    git wt \
+      | sed '1d' \
+      | sed 's/^[* ]*//' \
+      | fzf --height 40% --reverse
+  )" || return
+
+  dir="$(printf '%s\n' "$line" | awk -F '  +' '{print $1}')"
+  if [ -n "$dir" ]; then
+    cd "$dir"
+  fi
+}
 . "$HOME/.cargo/env"
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 alias claude-mem='bun "/home/mitomi/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+export PATH="$HOME/.npm-global/bin:$PATH"

@@ -12,8 +12,10 @@ GitHub PRのdiff・インラインコメント・レビューサマリー・会�
 ユーザーからPR URLを受け取り、以下のスクリプトを実行する。
 
 ```bash
-bash ~/.claude/skills/export-pr-review/export-pr.sh <PR_URL> [PR_URL ...]
+bash export-pr.sh <PR_URL> [PR_URL ...]
 ```
+
+`export-pr.sh` はこの skill ディレクトリ内の同梱スクリプトを使う。
 
 ## 出力
 
