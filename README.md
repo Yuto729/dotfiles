@@ -59,6 +59,10 @@ sudo apt install git curl ripgrep fd-find nodejs npm
 以下の公式URLを参照
 https://wezterm.org/install/linux.html#__tabbed_1_3
 
+```sh
+brew install --cask wezterm
+```
+
 ### Ghostty
 
 linux版は以下を参照
@@ -80,21 +84,21 @@ tmux
 
 #### プラグイン
 
-| プラグイン | 役割 |
-|-----------|------|
-| tmux-resurrect | セッションの手動保存・復元 |
+| プラグイン     | 役割                                                    |
+| -------------- | ------------------------------------------------------- |
+| tmux-resurrect | セッションの手動保存・復元                              |
 | tmux-continuum | resurrectの自動実行（15分間隔で保存、起動時に自動復元） |
 
 #### キーバインド
 
-| キー | 動作 |
-|------|------|
-| `Ctrl+a` | prefix（デフォルトの`Ctrl+b`から変更） |
-| `prefix + \|` | 縦分割 |
-| `prefix + -` | 横分割 |
-| `Alt+矢印キー` | ペイン移動 |
-| `prefix + Ctrl+s` | セッション手動保存 |
-| `prefix + Ctrl+r` | セッション手動復元 |
+| キー              | 動作                                   |
+| ----------------- | -------------------------------------- |
+| `Ctrl+a`          | prefix（デフォルトの`Ctrl+b`から変更） |
+| `prefix + \|`     | 縦分割                                 |
+| `prefix + -`      | 横分割                                 |
+| `Alt+矢印キー`    | ペイン移動                             |
+| `prefix + Ctrl+s` | セッション手動保存                     |
+| `prefix + Ctrl+r` | セッション手動復元                     |
 
 ### Claude Code
 
@@ -107,10 +111,10 @@ chezmoiテンプレートでOS別に設定を分岐している（`settings.json
 
 #### 管理対象
 
-| ファイル | 説明 |
-|---------|------|
-| `settings.json` | グローバル設定（permissions, hooks）※テンプレートでOS分岐 |
-| `commands/analyze-diff.md` | `/analyze-diff` カスタムコマンド |
+| ファイル                   | 説明                                                      |
+| -------------------------- | --------------------------------------------------------- |
+| `settings.json`            | グローバル設定（permissions, hooks）※テンプレートでOS分岐 |
+| `commands/analyze-diff.md` | `/analyze-diff` カスタムコマンド                          |
 
 #### 注意
 
