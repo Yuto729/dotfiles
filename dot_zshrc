@@ -1,0 +1,45 @@
+export PATH="$HOME/.local/bin:$PATH"
+
+# Colored prompt (green user@host, blue path)
+PROMPT='%B%F{green}%n@%m%f%b:%B%F{blue}%~%f%b%# '
+
+# History
+HISTSIZE=1000
+SAVEHIST=2000
+HISTFILE=~/.zsh_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt share_history
+
+# Color aliases
+alias ls='ls -G'
+alias ll='ls -alFG'
+alias la='ls -AG'
+alias l='ls -CFG'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# ghq + fzf でリポジトリに移動
+g() {
+  local repo=$(ghq list -p | fzf --preview 'ls -la {}' --preview-window=right:50%:wrap)
+  if [ -n "$repo" ]; then
+    cd "$repo"
+  fi
+}
+
+# git wt + fzf で worktree に移動
+gw() {
+  local line dir
+  line="$(
+    git wt \
+      | sed '1d' \
+      | sed 's/^[* ]*//' \
+      | fzf --height 40% --reverse
+  )" || return
+
+  dir="$(printf '%s\n' "$line" | awk -F '  +' '{print $1}')"
+  if [ -n "$dir" ]; then
+    cd "$dir"
+  fi
+}
