@@ -1,2 +1,0 @@
-- 魔法のスプレッドシート
-  - https://butter-lamb-af5.notion.site/302a1618c4548018818ff3015b1e303b?v=302a1618c45481c38510000ccd29ece5
