@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+
+  // App
+  "app": {
+    "appearance": "dark"
+  },
+
+  // Terminal
+  "terminal": {
+    "copyOnSelect": false
+  },
+
+  // Keybindings - WezTermに揃える
+  "shortcuts": {
+    "bindings": {
+      // ペイン間移動 (WezTerm: Ctrl+H/J/K/L)
+      "focusLeft":  "ctrl+h",
+      "focusDown":  "ctrl+j",
+      "focusUp":    "ctrl+k",
+      "focusRight": "ctrl+l",
+
+      // タブ間移動 (WezTerm: Ctrl+Shift+H/L)
+      "prevSurface": "ctrl+shift+h",
+      "nextSurface": "ctrl+shift+l",
+
+      // 分割 (WezTerm: Leader+H/V)
+      "splitRight": ["ctrl+q", "h"],
+      "splitDown":  ["ctrl+q", "v"],
+
+      // ペイン操作 (WezTerm: Leader+X/Z)
+      "closeTab":        ["ctrl+q", "x"],
+      "toggleSplitZoom": ["ctrl+q", "z"],
+
+      // ブラウザズームアウト・リセット (ZoomInはJISキーボードでcmuxバグのため非設定、PR#3105待ち)
+      "browserZoomOut":   "cmd+-",
+      "browserZoomReset": "cmd+0"
+    }
+  }
+}

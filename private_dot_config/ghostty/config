@@ -1,4 +1,5 @@
-# Ghostty Configuration for Linux
+# Ghostty / cmux共通設定
+# フォントはcmuxがここから読み取るため、macOS(cmux)・Linux(Ghostty)で共有
 
 # Theme and colors
 theme = "Dracula"
@@ -8,9 +9,9 @@ background = #000000
 background-opacity = 1
 background-blur-radius = 20
 
-# Font
-font-family = "DejaVu Sans Mono"
-font-style = Bold
+# Font - WezTermと統一 (HackGen Console NF / size 14)
+font-family = "HackGen Console NF"
+font-size = 14
 
 # Cursor
 cursor-style = block
