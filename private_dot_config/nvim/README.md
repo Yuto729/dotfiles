@@ -76,20 +76,6 @@
 | `<leader>ft` | ターミナル（プロジェクトルート） |
 | `<leader>fT` | ターミナル（カレントディレクトリ） |
 
-## Claude Code
-
-| キー | 機能 |
-|------|------|
-| `<leader>ac` | Claude Codeを開く/閉じる |
-| `<leader>af` | Claude Codeにフォーカス |
-| `<leader>an` | 新しい会話を開始 |
-| `<leader>ar` | 会話を再開 |
-| `<leader>aC` | 会話を続ける |
-| `<leader>ab` | 現在のバッファを追加 |
-| `<leader>as` | 選択範囲をClaudeに送信（ビジュアルモード） |
-| `<leader>aa` | 差分を承認 |
-| `<leader>ad` | 差分を拒否 |
-
 ## Git操作
 
 ### Hunk操作（Gitsigns）
@@ -101,58 +87,6 @@
 | `<leader>hs` | hunkをstage |
 | `<leader>hu` | stageを取り消し |
 | `<leader>hp` | hunkをプレビュー |
-
-### Diffview（差分表示）
-
-#### 起動
-
-| キー | 機能 |
-|------|------|
-| `<leader>do` | 現在の変更（unstaged）を表示 |
-| `<leader>dh` | 1つ前のコミットとのdiff |
-| `<leader>dm` | mainブランチとの差分 |
-| `<leader>dd` | developブランチとの差分 |
-| `<leader>df` | 現在のファイルの履歴 |
-| `<leader>dF` | 全ファイルの履歴 |
-| `<leader>dc` | Diffviewを閉じる |
-
-#### Diffview内の操作
-
-| キー | 機能 |
-|------|------|
-| `Tab` | 次のファイルのdiffを開く |
-| `Shift+Tab` | 前のファイルのdiffを開く |
-| `]c` | 次のhunk（変更箇所）へ |
-| `[c` | 前のhunkへ |
-| `]F` | 最後のファイル |
-| `[F` | 最初のファイル |
-| `gf` | ファイルを開く |
-| `<leader>e` | ファイルパネルにフォーカス |
-| `<leader>b` | ファイルパネル表示切替 |
-| `g?` | ヘルプ表示 |
-
-#### ファイルパネル内
-
-| キー | 機能 |
-|------|------|
-| `j`/`k` | ファイル選択を移動 |
-| `Enter`/`l` | 選択したファイルのdiffを開く |
-| `s` または `-` | ステージ/アンステージ |
-| `S` | 全てステージ |
-| `U` | 全てアンステージ |
-| `X` | 変更を元に戻す |
-
-#### コンフリクト解消
-
-| キー | 機能 |
-|------|------|
-| `]x` | 次のコンフリクトへ |
-| `[x` | 前のコンフリクトへ |
-| `<leader>co` | OURSを選択 |
-| `<leader>ct` | THEIRSを選択 |
-| `<leader>cb` | BASEを選択 |
-| `<leader>ca` | 全てを選択 |
-| `dx` | コンフリクト領域を削除 |
 
 ## LSP（定義ジャンプなど）
 
