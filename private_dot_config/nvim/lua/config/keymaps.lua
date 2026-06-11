@@ -2,6 +2,11 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- Insert today's date in command-line mode (e.g. :e path/to/<C-t>.md)
+vim.keymap.set("c", "<C-t>", function()
+  return os.date("%Y-%m-%d")
+end, { expr = true, desc = "Insert today's date" })
+
 -- jj to escape insert mode
 vim.keymap.set("i", "jj", "<Esc>", { desc = "Escape insert mode" })
 
