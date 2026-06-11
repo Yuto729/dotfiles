@@ -1,4 +1,7 @@
 return {
+  -- render-markdown.nvim を無効化: マーカー非表示・太字レンダリングなし
+  { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
+
   -- conform.nvimのMarkdownフォーマッターを有効化（prettier使用のみ）
   {
     "stevearc/conform.nvim",
