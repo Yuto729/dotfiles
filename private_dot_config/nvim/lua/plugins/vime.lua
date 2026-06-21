@@ -9,6 +9,10 @@ return {
         -- nix profile の libanthy を明示指定（macOS では自動検出されないため）
         lib = vim.fn.expand("~/.nix-profile/lib/libanthy.dylib"),
       },
+      keymaps = {
+        -- 既定の <C-j> は端末/エディタに横取りされやすいため <C-l> に変更
+        toggle = "<C-l>",
+      },
     })
   end,
 }
