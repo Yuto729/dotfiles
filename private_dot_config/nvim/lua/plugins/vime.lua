@@ -10,8 +10,9 @@ return {
         lib = vim.fn.expand("~/.nix-profile/lib/libanthy.dylib"),
       },
       keymaps = {
-        -- 既定の <C-j> は端末/エディタに横取りされやすいため <C-l> に変更
-        toggle = "<C-l>",
+        -- 既定の <C-j> や <C-h/k/l> は cmux がペイン移動で横取りするため <C-a> に。
+        -- <C-space> は macOS の IME 切替と衝突するため不可。
+        toggle = "<C-a>",
       },
     })
   end,
