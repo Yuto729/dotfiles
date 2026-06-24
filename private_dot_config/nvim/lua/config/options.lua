@@ -5,17 +5,15 @@
 -- TrueColorを使用
 vim.opt.termguicolors = true
 
--- winbar にファイルパスを表示（相対パス）
-vim.opt.winbar = "%f"
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    vim.api.nvim_set_hl(0, "WinBar", { fg = "#888888" })
-    vim.api.nvim_set_hl(0, "WinBarNC", { fg = "#555555" })
-  end,
-})
+-- winbar にファイルパス（相対パス）+ 編集状態（%m → [+] / [-]）を表示
+vim.opt.winbar = "%f%m"
+local function set_winbar_hl()
+  vim.api.nvim_set_hl(0, "WinBar", { fg = "#d4d4d4", bold = true })
+  vim.api.nvim_set_hl(0, "WinBarNC", { fg = "#909090" })
+end
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_winbar_hl })
 -- 初回読み込み時にも適用
-vim.api.nvim_set_hl(0, "WinBar", { fg = "#888888" })
-vim.api.nvim_set_hl(0, "WinBarNC", { fg = "#555555" })
+set_winbar_hl()
 
 
 -- 入力中は list をオフにする（trail 表示を一時的に非表示）
