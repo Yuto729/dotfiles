@@ -128,10 +128,6 @@ chezmoiテンプレートでOS別に設定を分岐している（`settings.json
 ~/.local/share/chezmoi/
 ├── dot_bashrc                 # Bash設定
 ├── dot_tmux.conf              # tmux設定
-├── private_dot_claude/
-│   ├── settings.json.tmpl     # Claude Code設定（OS分岐テンプレート）
-│   └── commands/
-│       └── analyze-diff.md    # カスタムコマンド
 ├── private_dot_config/
 │   ├── ghostty/               # Ghostty設定
 │   ├── nvim/                  # Neovim設定 (LazyVim)
