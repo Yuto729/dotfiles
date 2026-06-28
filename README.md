@@ -68,67 +68,18 @@ brew install --cask wezterm
 linux版は以下を参照
 https://github.com/dariogriffo/ghostty-debian
 
-### tmux
+### cmux
 
-```bash
-# tmuxのインストール
-sudo apt install tmux
-
-# TPM（プラグインマネージャー）のインストール
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# tmux起動後、prefix + I でプラグインをインストール
-tmux
-# Ctrl+a → Shift+i
-```
-
-#### プラグイン
-
-| プラグイン     | 役割                                                    |
-| -------------- | ------------------------------------------------------- |
-| tmux-resurrect | セッションの手動保存・復元                              |
-| tmux-continuum | resurrectの自動実行（15分間隔で保存、起動時に自動復元） |
-
-#### キーバインド
-
-| キー              | 動作                                   |
-| ----------------- | -------------------------------------- |
-| `Ctrl+a`          | prefix（デフォルトの`Ctrl+b`から変更） |
-| `prefix + \|`     | 縦分割                                 |
-| `prefix + -`      | 横分割                                 |
-| `Alt+矢印キー`    | ペイン移動                             |
-| `prefix + Ctrl+s` | セッション手動保存                     |
-| `prefix + Ctrl+r` | セッション手動復元                     |
-
-### Claude Code
-
-chezmoiテンプレートでOS別に設定を分岐している（`settings.json.tmpl`）。
-
-- Linux: `paplay` + `notify-send` で通知
-- macOS: `afplay` + `osascript` で通知
-
-カスタムコマンド（`commands/`）はOS共通。
-
-#### 管理対象
-
-| ファイル                   | 説明                                                      |
-| -------------------------- | --------------------------------------------------------- |
-| `settings.json`            | グローバル設定（permissions, hooks）※テンプレートでOS分岐 |
-| `commands/analyze-diff.md` | `/analyze-diff` カスタムコマンド                          |
-
-#### 注意
-
-- `settings.local.json` はマシン固有のためchezmoi管理対象外
-- `.credentials.json` は秘密情報のため管理対象外
-- 通知用サウンドファイル（`sounds/`）は別途配置が必要
+ターミナルマルチプレクサ。設定は `private_dot_config/cmux/cmux.json` で管理している。
 
 ## ファイル構成
 
 ```
 ~/.local/share/chezmoi/
 ├── dot_bashrc                 # Bash設定
-├── dot_tmux.conf              # tmux設定
+├── dot_zshrc                  # Zsh設定
 ├── private_dot_config/
+│   ├── cmux/                  # cmux設定
 │   ├── ghostty/               # Ghostty設定
 │   ├── nvim/                  # Neovim設定 (LazyVim)
 │   └── wezterm/               # WezTerm設定
