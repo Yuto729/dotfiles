@@ -1,2 +1,6 @@
 .config/nvim/.git
 .config/nvim/.git/**
+{{ if ne .chezmoi.os "darwin" }}
+.config/yabai
+.config/skhd
+{{ end }}

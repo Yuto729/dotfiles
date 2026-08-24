@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# usage: focus-app <App Name>
+# yabai 管理下にそのアプリの窓があればフォーカス、無ければ起動
+app="$1"
+id=$(yabai -m query --windows | jq --arg a "$app" '[.[] | select(.app == $a and .["is-minimized"] == false)] | sort_by(.["has-focus"] | not) | .[0].id')
+if [ "$id" != "null" ] && [ -n "$id" ]; then
+  yabai -m window --focus "$id"
+else
+  open -a "$app"
+fi

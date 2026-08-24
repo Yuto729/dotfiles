@@ -1,0 +1,64 @@
+# skhd keybindings for yabai (macOS only). prefix = alt
+# 記法: alt - key / alt + shift - key。0x.. は keycode（例: 0x21 = [, 0x1E = ]）
+
+# ---------- Apps ----------
+alt - return : open -na cmux
+alt - 1      : $HOME/.config/yabai/focus-app "Google Chrome"
+alt - 2      : $HOME/.config/yabai/focus-app "Obsidian"
+alt - 3      : $HOME/.config/yabai/focus-app "Slack"
+alt - 0      : $HOME/.config/yabai/focus-app "cmux"
+
+# ---------- Focus ----------
+alt - h : yabai -m window --focus west  || yabai -m display --focus west
+alt - j : yabai -m window --focus stack.next || yabai -m window --focus south
+alt - k : yabai -m window --focus stack.prev || yabai -m window --focus north
+alt - l : yabai -m window --focus east  || yabai -m display --focus east
+alt - tab : yabai -m window --focus recent
+
+# ---------- Move (warp) ----------
+alt + shift - h : yabai -m window --warp west
+alt + shift - j : yabai -m window --warp south
+alt + shift - k : yabai -m window --warp north
+alt + shift - l : yabai -m window --warp east
+
+# ---------- Resize ----------
+alt + ctrl - h : yabai -m window --resize left:-40:0  || yabai -m window --resize right:-40:0
+alt + ctrl - j : yabai -m window --resize bottom:0:40 || yabai -m window --resize top:0:40
+alt + ctrl - k : yabai -m window --resize bottom:0:-40 || yabai -m window --resize top:0:-40
+alt + ctrl - l : yabai -m window --resize right:40:0  || yabai -m window --resize left:40:0
+alt - e : yabai -m space --balance
+
+# ---------- Stack ----------
+# 指定方向の窓と同じ stack にまとめる。stack から出したいときは alt+shift-hjkl(warp) でよそへ動かせばよい
+alt + cmd - h : yabai -m window --stack west
+alt + cmd - j : yabai -m window --stack south
+alt + cmd - k : yabai -m window --stack north
+alt + cmd - l : yabai -m window --stack east
+
+# ---------- Display ----------
+alt - 0x21 : yabai -m display --focus prev || yabai -m display --focus next
+alt - 0x1E : yabai -m display --focus next || yabai -m display --focus prev
+alt + shift - 0x21 : yabai -m window --display prev && yabai -m display --focus prev
+alt + shift - 0x1E : yabai -m window --display next && yabai -m display --focus next
+
+# ---------- Layout ----------
+alt - f : yabai -m window --toggle zoom-fullscreen
+alt - g : yabai -m window --toggle zoom-parent
+alt + shift - f : yabai -m window --toggle float && yabai -m window --grid 6:6:1:1:4:4
+alt - s : [ "$(yabai -m query --spaces --space | jq -r '.type')" = bsp ] \
+    && yabai -m space --layout stack || yabai -m space --layout bsp
+alt - t : yabai -m window --toggle split
+alt - r : yabai -m space --rotate 90
+alt - m : yabai -m space --mirror y-axis
+alt - c : yabai -m window --close
+alt - d : yabai -m space --toggle mission-control
+
+# ---------- Service ----------
+alt + shift - r : yabai --restart-service; skhd --restart-service
+
+# ---------- Arrange ----------
+alt + shift - a : $HOME/.config/yabai/arrange
+
+# ---------- Space layout ----------
+alt + shift - s : [ "$(yabai -m query --spaces --space | jq -r '.type')" = float ] \
+    && yabai -m space --layout bsp || yabai -m space --layout float

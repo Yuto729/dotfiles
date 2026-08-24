@@ -1,0 +1,55 @@
+#!/usr/bin/env sh
+# yabai config (macOS only). SIP は有効のまま運用する前提（space 操作は使わない）
+
+# ---- Layout ----
+yabai -m config layout                       bsp
+yabai -m config window_placement             second_child
+yabai -m config split_type                   auto
+yabai -m config auto_balance                 off
+yabai -m config window_gap                   8
+yabai -m config top_padding                  8
+yabai -m config bottom_padding               8
+yabai -m config left_padding                 8
+yabai -m config right_padding                8
+yabai -m config window_origin_display        default
+yabai -m config skip_window_focus_animation  on
+
+# ---- Mouse ----
+yabai -m config mouse_modifier               alt
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+yabai -m config mouse_follows_focus          on
+yabai -m config focus_follows_mouse          off
+
+# ---- Display roles ----
+# main(内蔵) = ターミナル専用 / external = Chrome, Obsidian, Slack
+# macOS では main ディスプレイの frame 原点が (0,0)。それ以外を external とみなす
+MAIN=$(yabai -m query --displays | jq '[.[] | select(.frame.x == 0 and .frame.y == 0)][0].index')
+EXT=$(yabai -m query --displays  | jq '[.[] | select(.frame.x != 0 or  .frame.y != 0)][0].index')
+
+# 内蔵ディスプレイは stack（ターミナル1枚、他が来ても重ねるだけ）
+yabai -m config --space "$(yabai -m query --displays --display "$MAIN" | jq '.spaces[0]')" layout stack
+
+yabai -m rule --add label=term app="^cmux$" display="$MAIN"
+if [ "$EXT" != "null" ]; then
+  yabai -m rule --add label=chrome   app="^Google Chrome$" display="$EXT"
+  yabai -m rule --add label=obsidian app="^Obsidian$"      display="$EXT"
+  yabai -m rule --add label=slack    app="^Slack$"         display="$EXT"
+fi
+
+# ---- タイルしないもの ----
+yabai -m rule --add app="^(System Settings|Finder|Calculator|Activity Monitor|Archive Utility|Karabiner-Elements|Raycast)$" manage=off
+yabai -m rule --add title="^(Preferences|Settings|設定)$" manage=off
+yabai -m rule --add app="^Google Chrome$" title="^(Open|Save|Print|開く|保存).*" manage=off
+yabai -m rule --add app="^Obsidian$"      title="^(Open|開く).*" manage=off
+yabai -m rule --add subrole="^AXDialog$" manage=off
+
+# 既存ウィンドウにもルールを適用（display 割当もここで効く）
+yabai -m rule --apply
+
+# ディスプレイ抜き差し時に再読込
+yabai -m signal --add event=display_added   action="yabai --restart-service"
+yabai -m signal --add event=display_removed action="yabai --restart-service"
+
+echo "yabai configuration loaded..."
