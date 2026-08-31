@@ -54,10 +54,9 @@ alt - c : yabai -m window --close
 alt - d : yabai -m space --toggle mission-control
 
 # ---------- Service ----------
-alt + shift - r : yabai --restart-service; skhd --restart-service
-
-# ---------- Arrange ----------
-alt + shift - a : $HOME/.config/yabai/arrange
+# --stop-service は LaunchAgent の登録自体を外すため、その後は --restart-service ではなく --start-service が必要
+alt + shift - r : (yabai -m query --displays >/dev/null 2>&1 && yabai --restart-service || yabai --start-service); skhd --restart-service
+alt + ctrl + shift - r : yabai --stop-service
 
 # ---------- Space layout ----------
 alt + shift - s : [ "$(yabai -m query --spaces --space | jq -r '.type')" = float ] \

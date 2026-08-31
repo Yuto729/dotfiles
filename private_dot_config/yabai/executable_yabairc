@@ -1,6 +1,12 @@
 #!/usr/bin/env sh
 # yabai config (macOS only). SIP は有効のまま運用する前提（space 操作は使わない）
 
+# 起動直後は yabai 本体の query がまだ空を返すことがあるため、応答が安定するまで待つ
+for i in $(seq 1 20); do
+  yabai -m query --displays >/dev/null 2>&1 && break
+  sleep 0.2
+done
+
 # ---- Layout ----
 yabai -m config layout                       bsp
 yabai -m config window_placement             second_child
@@ -23,13 +29,20 @@ yabai -m config mouse_follows_focus          on
 yabai -m config focus_follows_mouse          off
 
 # ---- Display roles ----
-# main(内蔵) = ターミナル専用 / external = Chrome, Obsidian, Slack
+# main(内蔵) = ターミナル専用 / external = Chrome, Obsidian, Slack, Notion 等（stackで重ねる）
 # macOS では main ディスプレイの frame 原点が (0,0)。それ以外を external とみなす
 MAIN=$(yabai -m query --displays | jq '[.[] | select(.frame.x == 0 and .frame.y == 0)][0].index')
 EXT=$(yabai -m query --displays  | jq '[.[] | select(.frame.x != 0 or  .frame.y != 0)][0].index')
 
-# 内蔵ディスプレイは stack（ターミナル1枚、他が来ても重ねるだけ）
-yabai -m config --space "$(yabai -m query --displays --display "$MAIN" | jq '.spaces[0]')" layout stack
+# 内蔵・外部ともに、そのディスプレイの全 space を stack にする（複数窓が来ても重ねるだけ）
+yabai -m query --displays --display "$MAIN" | jq '.spaces[]' | while read -r s; do
+  yabai -m config --space "$s" layout stack
+done
+if [ "$EXT" != "null" ]; then
+  yabai -m query --displays --display "$EXT" | jq '.spaces[]' | while read -r s; do
+    yabai -m config --space "$s" layout stack
+  done
+fi
 
 yabai -m rule --add label=term app="^cmux$" display="$MAIN"
 if [ "$EXT" != "null" ]; then
