@@ -38,8 +38,11 @@ alt + cmd - l : yabai -m window --stack east
 # ---------- Display ----------
 alt - 0x21 : yabai -m display --focus prev || yabai -m display --focus next
 alt - 0x1E : yabai -m display --focus next || yabai -m display --focus prev
-alt + shift - 0x21 : yabai -m window --display prev && yabai -m display --focus prev
-alt + shift - 0x1E : yabai -m window --display next && yabai -m display --focus next
+# 端のディスプレイでは prev/next が失敗するため、反対方向へフォールバックしてトグルにする
+alt + shift - 0x21 : yabai -m window --display prev && yabai -m display --focus prev \
+    || (yabai -m window --display next && yabai -m display --focus next)
+alt + shift - 0x1E : yabai -m window --display next && yabai -m display --focus next \
+    || (yabai -m window --display prev && yabai -m display --focus prev)
 
 # ---------- Layout ----------
 alt - f : yabai -m window --toggle zoom-fullscreen

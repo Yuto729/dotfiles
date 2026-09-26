@@ -52,7 +52,8 @@ if [ "$EXT" != "null" ]; then
 fi
 
 # ---- タイルしないもの ----
-yabai -m rule --add app="^(System Settings|Finder|Calculator|Activity Monitor|Archive Utility|Karabiner-Elements|Raycast)$" manage=off
+# 日本語環境ではアプリ名がローカライズされる（例: システム設定）ため両方の名前を並べる
+yabai -m rule --add app="^(System Settings|システム設定|Finder|Calculator|計算機|Activity Monitor|アクティビティモニタ|Archive Utility|アーカイブユーティリティ|Karabiner-Elements|Raycast)$" manage=off
 yabai -m rule --add title="^(Preferences|Settings|設定)$" manage=off
 yabai -m rule --add app="^Google Chrome$" title="^(Open|Save|Print|開く|保存).*" manage=off
 yabai -m rule --add app="^Obsidian$"      title="^(Open|開く).*" manage=off
