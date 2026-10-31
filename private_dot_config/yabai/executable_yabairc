@@ -8,7 +8,9 @@ for i in $(seq 1 20); do
 done
 
 # ---- Layout ----
-yabai -m config layout                       bsp
+# 全ディスプレイ・全 space を stack 運用にする。起動直後の per-space 設定は space が
+# 未確定で失敗することがあるため、グローバル既定を stack にして競合をなくす
+yabai -m config layout                       stack
 yabai -m config window_placement             second_child
 yabai -m config split_type                   auto
 yabai -m config auto_balance                 off
@@ -33,16 +35,6 @@ yabai -m config focus_follows_mouse          off
 # macOS では main ディスプレイの frame 原点が (0,0)。それ以外を external とみなす
 MAIN=$(yabai -m query --displays | jq '[.[] | select(.frame.x == 0 and .frame.y == 0)][0].index')
 EXT=$(yabai -m query --displays  | jq '[.[] | select(.frame.x != 0 or  .frame.y != 0)][0].index')
-
-# 内蔵・外部ともに、そのディスプレイの全 space を stack にする（複数窓が来ても重ねるだけ）
-yabai -m query --displays --display "$MAIN" | jq '.spaces[]' | while read -r s; do
-  yabai -m config --space "$s" layout stack
-done
-if [ "$EXT" != "null" ]; then
-  yabai -m query --displays --display "$EXT" | jq '.spaces[]' | while read -r s; do
-    yabai -m config --space "$s" layout stack
-  done
-fi
 
 yabai -m rule --add label=term app="^cmux$" display="$MAIN"
 if [ "$EXT" != "null" ]; then
